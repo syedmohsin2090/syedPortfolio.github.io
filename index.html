@@ -4,606 +4,388 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Syed Mohsin | UiPath Architect</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&amp;display=swap" rel="stylesheet"/>
+<meta content="Syed Mohsin - Forward Deployment Engineer (FDE), Automation Architect, and AI Architect specializing in healthcare payer operations, enterprise automation modernization, and production delivery." name="description"/>
+<title>Syed Mohsin | FDE · Automation Architect · AI Architect</title>
 <style>
-  :root {
-    --bg: #050810;
-    --bg2: #080d1a;
-    --accent: #00c8ff;
-    --accent2: #7b5cf0;
-    --accent3: #00ffa3;
-    --text: #e8eaf2;
-    --muted: #6b7280;
-    --card: rgba(255,255,255,0.04);
-    --border: rgba(255,255,255,0.08);
-    --glow: 0 0 40px rgba(0,200,255,0.18);
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+    :root {
+      --bg: #ffffff;
+      --text: #111827;
+      --muted: #5b6472;
+      --line: #dfe3e8;
+      --accent: #174ea6;
+      --accent-dark: #103a7a;
+      --soft: #f7f9fc;
+      --max: 1140px;
+    }
 
-  /* Custom cursor */
-  .cursor{position:fixed;width:12px;height:12px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,background .2s;mix-blend-mode:screen;}
-  .cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,200,255,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .18s ease;}
-  body:has(a:hover) .cursor{background:var(--accent3);transform:translate(-50%,-50%) scale(1.5);}
-  body:has(a:hover) .cursor-ring{width:50px;height:50px;border-color:var(--accent3);}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
 
-  /* Scrollbar */
-  ::-webkit-scrollbar{width:3px;}
-  ::-webkit-scrollbar-track{background:var(--bg);}
-  ::-webkit-scrollbar-thumb{background:var(--accent2);}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; text-decoration: none; font-weight: 800; letter-spacing: -.02em; }
+    .brand-text { color: var(--text); line-height: 1.1; }
+    .brand-role { color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 650; }
+    .nav-links a:hover { color: var(--text); }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 44px; padding: 0 18px; border-radius: 8px;
+      border: 1px solid var(--accent); background: var(--accent); color: #fff;
+      text-decoration: none; font-weight: 750; font-size: 14px;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .button:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .button.resume-button { background: #174ea6; color: #ffffff; border-color: #174ea6; }
+    .button.resume-button:visited { color: #ffffff; }
+    .button.resume-button:hover { background: #103a7a; color: #ffffff; border-color: #103a7a; }
+    .button.secondary { background: #fff; color: var(--text); border-color: var(--line); }
+    .button.secondary:hover { border-color: #aeb6c2; background: #fff; }
 
-  /* NAV */
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 6%;display:flex;justify-content:space-between;align-items:center;transition:background .4s,backdrop-filter .4s;}
-  nav.scrolled{background:rgba(5,8,16,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-.02em;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  .nav-links{display:flex;gap:2.5rem;list-style:none;}
-  .nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;transition:color .2s;position:relative;}
-  .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s;}
-  .nav-links a:hover{color:var(--accent);}
-  .nav-links a:hover::after{width:100%;}
+    .hero { padding: 92px 0 64px; background: #fff; border-bottom: 1px solid var(--line); }
+    .hero-grid { display: grid; grid-template-columns: 1fr; gap: 64px; align-items: center; }
+    .eyebrow { margin: 0 0 14px; color: var(--accent); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .13em; }
+    h1 { margin: 0; font-size: clamp(46px, 7vw, 78px); line-height: .98; letter-spacing: -.055em; max-width: 900px; }
+    .hero-title { margin: 20px 0 0; font-size: clamp(22px, 3vw, 32px); line-height: 1.2; color: #293242; font-weight: 700; letter-spacing: -.025em; }
+    .hero-copy { max-width: 760px; margin: 24px 0 0; color: var(--muted); font-size: 18px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 26px; color: var(--muted); font-size: 14px; }
+    .hero-meta a { text-decoration: none; border-bottom: 1px solid transparent; }
+    .hero-meta a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    .stats { padding: 30px 0; border-bottom: 1px solid var(--line); background: #fff; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat { padding: 14px 24px; border-right: 1px solid var(--line); }
+    .stat:first-child { padding-left: 0; }
+    .stat:last-child { border-right: 0; }
+    .stat strong { display: block; font-size: 28px; letter-spacing: -.04em; }
+    .stat span { color: var(--muted); font-size: 13px; }
 
-  /* CANVAS */
-  #bg-canvas{position:fixed;inset:0;z-index:0;opacity:.7;}
+    section { padding: 82px 0; background: #fff; border-bottom: 1px solid var(--line); }
+    .section-head { display: grid; grid-template-columns: .7fr 1.3fr; gap: 48px; margin-bottom: 42px; align-items: start; }
+    .section-kicker { color: var(--accent); font-size: 12px; font-weight: 850; text-transform: uppercase; letter-spacing: .14em; }
+    h2 { margin: 0; font-size: clamp(34px, 5vw, 52px); line-height: 1.08; letter-spacing: -.045em; }
+    .section-intro { margin: 8px 0 0; color: var(--muted); font-size: 17px; max-width: 700px; }
 
-  /* HERO */
-  #hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;padding:0 6%;padding-top:80px;}
-  .hero-inner{max-width:900px;}
-  .hero-label{display:inline-flex;align-items:center;gap:.6rem;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem;opacity:0;animation:fadeUp .8s .3s forwards;}
-  .hero-label span{width:28px;height:1px;background:var(--accent);}
-  .hero-name{font-family:'Syne',sans-serif;font-size:clamp(3.5rem,8vw,7.5rem);font-weight:800;line-height:.95;letter-spacing:-.04em;margin-bottom:1.4rem;opacity:0;animation:fadeUp .9s .5s forwards;}
-  .hero-name .line2{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  .hero-tagline{font-size:1.25rem;font-weight:300;color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:3rem;opacity:0;animation:fadeUp .9s .7s forwards;}
-  .hero-tagline strong{color:var(--text);font-weight:500;}
-  .hero-ctas{display:flex;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:fadeUp .9s .9s forwards;}
-  .btn-primary{padding:.85rem 2.2rem;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:4px;color:#fff;font-weight:600;font-size:.9rem;text-decoration:none;letter-spacing:.02em;transition:transform .2s,box-shadow .2s;}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,200,255,.3);}
-  .btn-outline{padding:.85rem 2.2rem;border:1px solid var(--border);border-radius:4px;color:var(--text);font-weight:500;font-size:.9rem;text-decoration:none;letter-spacing:.02em;transition:border-color .2s,color .2s,transform .2s;}
-  .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
-  .hero-stats{position:absolute;right:6%;bottom:12%;display:flex;flex-direction:column;gap:2rem;opacity:0;animation:fadeIn 1.2s 1.2s forwards;}
-  .stat-item{text-align:right;}
-  .stat-num{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
-  .stat-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.2rem;}
-  .scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:0;animation:fadeIn 1.4s 1.6s forwards;}
-  .scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--muted),transparent);animation:scrollAnim 1.8s ease-in-out infinite;}
+    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; }
+    .about-copy p { margin: 0 0 18px; color: #364152; font-size: 17px; }
+    .focus-list { display: grid; gap: 0; border-top: 1px solid var(--line); }
+    .focus-item { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 17px 0; border-bottom: 1px solid var(--line); }
+    .focus-num { color: var(--accent); font-size: 12px; font-weight: 850; padding-top: 3px; }
+    .focus-item strong { display: block; margin-bottom: 3px; }
+    .focus-item p { margin: 0; color: var(--muted); font-size: 14px; }
 
-  /* SECTIONS */
-  section{position:relative;z-index:1;padding:8rem 6%;}
-  .section-label{display:flex;align-items:center;gap:.8rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;}
-  .section-label::before{content:'';width:24px;height:1px;background:var(--accent2);}
-  h2.section-title{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;letter-spacing:-.03em;margin-bottom:3.5rem;}
-  .divider{width:100%;height:1px;background:var(--border);margin-bottom:6rem;}
+    .capabilities { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { border: 1px solid var(--line); border-radius: 10px; padding: 26px; background: #fff; }
+    .card-num { color: var(--accent); font-size: 12px; font-weight: 850; letter-spacing: .1em; }
+    .card h3 { margin: 16px 0 10px; font-size: 19px; letter-spacing: -.02em; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
-  /* ABOUT */
-  #about .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
-  .about-text p{color:var(--muted);line-height:1.9;font-size:1.05rem;margin-bottom:1.4rem;}
-  .about-text p strong{color:var(--text);}
-  .cert-list{display:flex;flex-direction:column;gap:1rem;}
-  .cert-item{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem 1.4rem;background:var(--card);border:1px solid var(--border);border-radius:8px;transition:border-color .2s,transform .2s;}
-  .cert-item:hover{border-color:rgba(0,200,255,.3);transform:translateX(4px);}
-  .cert-icon{width:36px;height:36px;border-radius:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
-  .cert-info strong{display:block;font-size:.9rem;font-weight:500;margin-bottom:.15rem;}
-  .cert-info span{font-size:.78rem;color:var(--muted);}
+    .timeline { border-top: 1px solid var(--line); }
+    .role { display: grid; grid-template-columns: 220px 1fr; gap: 48px; padding: 38px 0; border-bottom: 1px solid var(--line); }
+    .role-meta { color: var(--muted); font-size: 13px; }
+    .role-meta strong { display: block; color: var(--text); font-size: 15px; margin-bottom: 4px; }
+    .role h3 { margin: 0 0 4px; font-size: 23px; letter-spacing: -.025em; }
+    .role-company { color: var(--accent); font-weight: 750; margin-bottom: 14px; }
+    .role ul { margin: 0; padding-left: 19px; color: #364152; }
+    .role li { margin: 7px 0; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 17px; }
+    .tag { border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 12px; color: var(--muted); background: #fff; }
 
-  /* SKILLS */
-  #skills .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
-  .skill-card{padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:border-color .3s,transform .3s;}
-  .skill-card:hover{border-color:rgba(123,92,240,.4);transform:translateY(-4px);}
-  .skill-card-icon{font-size:1.8rem;margin-bottom:1.2rem;}
-  .skill-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-.01em;margin-bottom:1rem;}
-  .skill-tags{display:flex;flex-wrap:wrap;gap:.5rem;}
-  .skill-tag{padding:.3rem .8rem;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.15);border-radius:100px;font-size:.72rem;color:var(--accent);letter-spacing:.02em;}
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .skill-block { border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
+    .skill-block h3 { margin: 0 0 14px; font-size: 17px; }
+    .skill-block p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
 
-  /* EXPERIENCE */
-  #experience .exp-timeline{position:relative;padding-left:2.5rem;}
-  #experience .exp-timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent);}
-  .exp-item{position:relative;margin-bottom:4rem;}
-  .exp-item::before{content:'';position:absolute;left:-2.5rem;top:.5rem;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 16px var(--accent);border:2px solid var(--bg);}
-  .exp-meta{display:flex;align-items:center;gap:1rem;margin-bottom:.6rem;flex-wrap:wrap;}
-  .exp-period{font-size:.75rem;letter-spacing:.06em;color:var(--accent2);font-weight:500;text-transform:uppercase;}
-  .exp-location{font-size:.75rem;color:var(--muted);}
-  .exp-title{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:.25rem;}
-  .exp-company{font-size:.95rem;color:var(--accent);margin-bottom:1.2rem;}
-  .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
-  .exp-bullets li{color:var(--muted);font-size:.95rem;line-height:1.7;padding-left:1.2rem;position:relative;}
-  .exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--accent2);font-size:.8rem;}
+    .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .project { border: 1px solid var(--line); border-radius: 10px; padding: 26px; }
+    .project-label { color: var(--accent); font-size: 11px; font-weight: 850; text-transform: uppercase; letter-spacing: .12em; }
+    .project h3 { margin: 12px 0 10px; font-size: 21px; }
+    .project p { color: var(--muted); margin: 0; font-size: 14px; }
 
-  /* PROJECTS */
-  #projects .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
-  .proj-card{padding:2.2rem;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:border-color .3s,transform .3s;position:relative;overflow:hidden;}
-  .proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
-  .proj-card:hover{border-color:rgba(0,200,255,.2);transform:translateY(-5px);}
-  .proj-card:hover::before{transform:scaleX(1);}
-  .proj-tag{display:inline-block;padding:.25rem .8rem;background:rgba(0,255,163,.08);border:1px solid rgba(0,255,163,.2);border-radius:100px;font-size:.7rem;color:var(--accent3);letter-spacing:.04em;margin-bottom:1.2rem;}
-  .proj-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.8rem;}
-  .proj-card p{color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1.5rem;}
-  .proj-metrics{display:flex;gap:1.5rem;}
-  .proj-metric strong{display:block;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  .proj-metric span{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+    .contact-wrap { display: grid; grid-template-columns: 1.2fr .8fr; gap: 64px; align-items: start; }
+    .contact-wrap h2 { max-width: 760px; }
+    .contact-box { border: 1px solid var(--line); border-radius: 10px; padding: 28px; }
+    .contact-row { padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .contact-row:last-child { border-bottom: 0; }
+    .contact-row span { display: block; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .09em; }
+    .contact-row a, .contact-row strong { display: inline-block; margin-top: 4px; text-decoration: none; font-size: 15px; }
+    .contact-row a:hover { color: var(--accent); }
 
-  /* CONTACT */
-  #contact{text-align:center;}
-  #contact .contact-wrap{max-width:640px;margin:0 auto;}
-  #contact p{color:var(--muted);font-size:1.05rem;line-height:1.8;margin-bottom:3rem;}
-  .contact-links{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;}
-  .contact-card{display:flex;align-items:center;gap:.8rem;padding:1rem 1.8rem;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:.9rem;transition:border-color .2s,transform .2s;}
-  .contact-card:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px);}
-  .contact-card svg{width:18px;height:18px;flex-shrink:0;}
+    footer { background: #fff; padding: 28px 0; }
+    .footer { display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 13px; }
 
-  /* FOOTER */
-  footer{position:relative;z-index:1;padding:2rem 6%;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted);}
-  footer span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600;}
-
-  /* ANIMATIONS */
-  @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:none;}}
-  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-  @keyframes scrollAnim{0%,100%{opacity:0;}50%{opacity:1;}}
-
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
-  .reveal.visible{opacity:1;transform:none;}
-
-  /* GLOW ORBS */
-  .orb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;}
-  .orb1{width:500px;height:500px;background:rgba(0,200,255,.06);top:-100px;right:-100px;}
-  .orb2{width:400px;height:400px;background:rgba(123,92,240,.07);bottom:200px;left:-150px;}
-
-  @media(max-width:768px){
-    #about .about-grid{grid-template-columns:1fr;}
-    .hero-stats{display:none;}
-    nav .nav-links{display:none;}
-  }
-</style>
+    @media (max-width: 900px) {
+      .nav-links a:not(.button) { display: none; }
+      .hero-grid, .section-head, .about-grid, .contact-wrap { grid-template-columns: 1fr; }
+      .hero { padding-top: 68px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-bottom: 1px solid var(--line); }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(3), .stat:nth-child(4) { border-bottom: 0; }
+      .capabilities { grid-template-columns: repeat(2, 1fr); }
+      .role { grid-template-columns: 1fr; gap: 10px; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(100% - 26px, var(--max)); }
+      .brand-role { display: none; }
+      .nav { min-height: 64px; }
+      .nav-links { gap: 8px; }
+      .button { padding: 0 13px; }
+      h1 { font-size: 48px; }
+      .hero-title { font-size: 24px; }
+      .stats-grid, .capabilities, .skills-grid, .work-grid { grid-template-columns: 1fr; }
+      .stat { border-right: 0; padding-left: 0; }
+      .stat:nth-child(3) { border-bottom: 1px solid var(--line); }
+      section { padding: 64px 0; }
+      .footer { flex-direction: column; }
+    }
+    @media print {
+      .topbar, .hero-actions { display: none; }
+      .hero, section { padding: 36px 0; }
+      body { font-size: 12px; }
+      .card, .project, .skill-block, .contact-box { break-inside: avoid; }
+    }
+  </style>
 </head>
 <body>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<canvas id="bg-canvas"></canvas>
-<!-- NAV -->
-<nav id="navbar">
-<div class="logo">SM.</div>
-<ul class="nav-links">
-<li><a href="#about">About</a></li>
-<li><a href="#skills">Skills</a></li>
-<li><a href="#experience">Experience</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
+<header class="topbar">
+<div class="container nav">
+<a aria-label="Syed Mohsin home" class="brand" href="#top">
+<span class="brand-text">Syed Mohsin</span>
+<span class="brand-role">FDE · Automation Architect · AI Architect</span>
+</a>
+<nav aria-label="Primary navigation" class="nav-links">
+<a href="#about">About</a>
+<a href="#capabilities">Capabilities</a>
+<a href="#experience">Experience</a>
+<a href="#work">Impact</a>
+<a class="button resume-button" download="" href="Syed_Mohsin_FDE_Automation_AI_Architect_Resume.pdf">Download Resume</a>
 </nav>
-<!-- HERO -->
-<section id="hero">
-<div class="hero-inner">
-<div class="hero-label">UiPath Architect · Agentic AI · Intelligent Automation</div>
-<h1 class="hero-name">
-      Syed<br/>
-<span class="line2">Mohsin.</span>
-</h1>
-<p class="hero-tagline">Delivering UiPath-first enterprise automation leadership for healthcare claims and payer operations across intake, eligibility, provider, pricing, adjudication, document, and exception workflows — with 10+ years of experience, 5+ years leading architect-level automation design, and automation initiatives contributing to $50M+ in business savings and operational value across UiPath, UiPath Agentic AI, UiPath Autopilot, and Pega Robotics.</p>
-<div class="hero-ctas">
-<a class="btn-primary" href="#experience">View Experience</a>
-<a class="btn-outline" download="" href="resume.docx">Download Resume</a>
+</div>
+</header>
+<main id="top">
+<section class="hero">
+<div class="container hero-grid">
+<div>
+<p class="eyebrow">FDE · Automation Architect · AI Architect</p>
+<h1>Syed Mohsin</h1>
+<p class="hero-title">Turning complex enterprise workflows into practical, production-ready solutions.</p>
+<p class="hero-copy">
+            Forward Deployment Engineer (FDE), Automation Architect, and AI Architect with 10+ years of technology delivery experience, including 9+ years in U.S. enterprise environments. I work directly with business teams, operations leaders, and engineers to discover problems, modernize automation portfolios, design solutions, deploy to production, and drive measurable adoption across healthcare, banking, and utilities.
+          </p>
+<div class="hero-actions">
+<a class="button resume-button" download="" href="Syed_Mohsin_FDE_Automation_AI_Architect_Resume.pdf">Download Resume</a>
+<a class="button secondary" href="#contact">Contact Me</a>
+</div>
+<div class="hero-meta">
+<span>Bloomfield, Connecticut</span>
+<a href="mailto:mohsin.sma0105@gmail.com">mohsin.sma0105@gmail.com</a>
+<a href="https://www.linkedin.com/in/syedm0105/" rel="noreferrer" target="_blank">LinkedIn</a>
 </div>
 </div>
-<div class="hero-stats">
-<div class="stat-item">
-<div class="stat-num" data-count="10">0</div>
-<div class="stat-label">Years of Experience</div>
+
 </div>
-<div class="stat-item">
-<div class="stat-num" data-count="5">0</div>
-<div class="stat-label">Years as Architect</div>
-</div>
-<div class="stat-item">
-<div class="stat-num">$50M+</div>
-<div class="stat-label">Business Savings Enabled</div>
-</div>
-</div>
-<div class="scroll-hint">
-<div class="scroll-line"></div>
-    scroll
-  </div>
 </section>
-<div class="divider" style="position:relative;z-index:1;margin:0 6%;"></div>
-<!-- ABOUT -->
+<div class="stats">
+<div class="container stats-grid">
+<div class="stat"><strong>9+ yrs</strong><span>U.S. enterprise delivery</span></div>
+<div class="stat"><strong>5+ yrs</strong><span>Architecture leadership</span></div>
+<div class="stat"><strong>$100M+</strong><span>Business value contributed</span></div>
+<div class="stat"><strong>40%</strong><span>Manual effort reduction</span></div>
+</div>
+</div>
 <section id="about">
-<div class="section-label">Who I Am</div>
-<h2 class="section-title reveal">UiPath-First Enterprise Automation Leadership</h2>
-<div class="about-grid reveal">
-<div class="about-text">
-<p>I am a UiPath Architect with 10+ years of IT and automation experience, including 5+ years in architect-level roles, solution design, and enterprise automation leadership across UiPath, UiPath Agentic AI, UiPath Autopilot, Pega Robotics / OpenSpan, Blue Prism, and Automation Anywhere, with a strong focus on healthcare claims and payer operations. My automation initiatives have contributed to $50M+ in business savings and operational value.</p>
-<p>My background spans the full delivery lifecycle — process discovery, feasibility, solution design, development, testing, deployment, and production support — with deep experience across healthcare claims intake, member eligibility, benefits validation, provider data verification, prior authorization support, claims adjudication, pricing / allowable checks, claim document retrieval, audit support, and exception handling.</p>
-<p>I also bring a strong .NET foundation in C#, VB.NET, ASP.NET, SQL, XML, and Visual Studio, with hands-on experience building reusable components, integrating enterprise applications, and mentoring teams in Agile and Scrum environments. I actively use Cursor and AI-assisted development practices to improve productivity in healthcare workflow design, coding, documentation, and review.</p>
-</div>
-<div class="cert-list">
-<div class="cert-item">
-<div class="cert-icon">🏆</div>
-<div class="cert-info">
-<strong>Certified Robotics System Architect 8.0</strong>
-<span>Pega Robotics</span>
+<div class="container">
+<div class="section-head">
+<div class="section-kicker">About</div>
+<div>
+<h2>Embedded with the business. Accountable through production.</h2>
+<p class="section-intro">My work sits at the intersection of customer problems, technical architecture, and operational execution.</p>
 </div>
 </div>
-<div class="cert-item">
-<div class="cert-icon">🤖</div>
-<div class="cert-info">
-<strong>Pega Robotic Automation Architect Essentials Assessment</strong>
-<span>Pega Robotics</span>
+<div class="about-grid">
+<div class="about-copy">
+<p>I partner closely with business teams and end users to understand how work actually happens, uncover operational friction, and translate complex requirements into solutions that teams can adopt.</p>
+<p>My background spans healthcare payer operations, claims workflows, banking, fraud and AML, mortgage processes, and utility operations. I combine domain understanding with hands-on engineering across UiPath, Pega Robotics, AI-enabled automation, C#/.NET, SQL, mainframes, web applications, and enterprise integrations.</p>
+<p>I stay involved beyond design: prototyping, development oversight, testing, deployment, hypercare, production support, feedback loops, and continuous improvement.</p>
 </div>
-</div>
-<div class="cert-item">
-<div class="cert-icon">⚡</div>
-<div class="cert-info">
-<strong>Automation Anywhere Certified Advanced RPA Professional</strong>
-<span>Automation Anywhere</span>
-</div>
-</div>
-<div class="cert-item">
-<div class="cert-icon">🔷</div>
-<div class="cert-info">
-<strong>UiPath Certified Professional RPA Developer Beginner User</strong>
-<span>UiPath</span>
-</div>
-</div>
-<div class="cert-item">
-<div class="cert-icon">🔵</div>
-<div class="cert-info">
-<strong>Certified Blue Prism Developer</strong>
-<span>Blue Prism</span>
-</div>
+<div class="focus-list">
+<div class="focus-item"><div class="focus-num">01</div><div><strong>Customer &amp; stakeholder discovery</strong><p>Work directly with operations, product, compliance, and engineering teams.</p></div></div>
+<div class="focus-item"><div class="focus-num">02</div><div><strong>Solution design &amp; rapid validation</strong><p>Turn ambiguous workflows into practical architectures, prototypes, and delivery plans.</p></div></div>
+<div class="focus-item"><div class="focus-num">03</div><div><strong>Deployment &amp; adoption</strong><p>Own testing, release readiness, rollout, user enablement, and measurable adoption.</p></div></div>
+<div class="focus-item"><div class="focus-num">04</div><div><strong>Production ownership</strong><p>Stabilize solutions, resolve issues, capture field feedback, and improve continuously.</p></div></div>
 </div>
 </div>
 </div>
 </section>
-<!-- SKILLS -->
-<section id="skills">
-<div class="section-label">Expertise</div>
-<h2 class="section-title reveal">Technical Proficiency</h2>
-<div class="skills-grid">
-<div class="skill-card reveal">
-<div class="skill-card-icon">🤖</div>
-<h3>Automation Platforms</h3>
-<div class="skill-tags"><span class="skill-tag">UiPath</span>
-<span class="skill-tag">UiPath Agentic AI</span>
-<span class="skill-tag">UiPath Autopilot</span>
-<span class="skill-tag">UiPath Apps</span>
-<span class="skill-tag">UiPath AI Center / IXP</span>
-<span class="skill-tag">Pega Robotics</span>
-<span class="skill-tag">OpenSpan</span>
-<span class="skill-tag">Blue Prism</span>
-<span class="skill-tag">Automation Anywhere</span>
+<section id="capabilities">
+<div class="container">
+<div class="section-head">
+<div class="section-kicker">Capabilities</div>
+<div>
+<h2>Forward-deployed delivery from discovery to scale.</h2>
+<p class="section-intro">A blend of consulting, architecture, engineering, and operational ownership.</p>
 </div>
 </div>
-<div class="skill-card reveal">
-<div class="skill-card-icon">🔗</div>
-<h3>Applications &amp; Integrations</h3>
-<div class="skill-tags">
-<span class="skill-tag">Web Applications</span>
-<span class="skill-tag">Mainframe</span>
-<span class="skill-tag">MS Office</span>
-<span class="skill-tag">Outlook</span>
-<span class="skill-tag">GUI Apps</span>
-<span class="skill-tag">Services</span>
-<span class="skill-tag">Microsoft App-V</span>
-<span class="skill-tag">IBM Mainframes</span>
-</div>
-</div>
-<div class="skill-card reveal">
-<div class="skill-card-icon">💻</div>
-<h3>Languages &amp; Development</h3>
-<div class="skill-tags">
-<span class="skill-tag">C#</span>
-<span class="skill-tag">VB.NET</span>
-<span class="skill-tag">ASP.NET</span>
-<span class="skill-tag">JavaScript</span>
-<span class="skill-tag">jQuery</span>
-<span class="skill-tag">HTML</span>
-<span class="skill-tag">CSS</span>
-<span class="skill-tag">XML</span>
-</div>
-</div>
-<div class="skill-card reveal">
-<div class="skill-card-icon">🗄️</div>
-<h3>Data, Reporting &amp; Middleware</h3>
-<div class="skill-tags">
-<span class="skill-tag">SQL</span>
-<span class="skill-tag">MySQL</span>
-<span class="skill-tag">Oracle 10g</span>
-<span class="skill-tag">ADO.NET</span>
-<span class="skill-tag">Entity Framework</span>
-<span class="skill-tag">LINQ</span>
-<span class="skill-tag">Excel Reporting</span>
-<span class="skill-tag">SSRS</span>
-</div>
-</div>
-<div class="skill-card reveal">
-<div class="skill-card-icon">🧰</div>
-<h3>Tools &amp; Source Control</h3>
-<div class="skill-tags"><span class="skill-tag">Cursor</span>
-<span class="skill-tag">Visual Studio</span>
-<span class="skill-tag">SoapUI</span>
-<span class="skill-tag">TFS</span>
-<span class="skill-tag">SVN</span>
-<span class="skill-tag">SourceTree</span>
-<span class="skill-tag">Bitbucket</span>
-<span class="skill-tag">Git</span>
-<span class="skill-tag">Visual Source Safe</span>
-</div>
-</div>
-<div class="skill-card reveal">
-<div class="skill-card-icon">📐</div>
-<h3>Delivery &amp; Methods</h3>
-<div class="skill-tags"><span class="skill-tag">End-to-End Automation</span>
-<span class="skill-tag">Architect Leadership</span>
-<span class="skill-tag">Agentic AI Enablement</span>
-<span class="skill-tag">Testing</span>
-<span class="skill-tag">Deployment</span>
-<span class="skill-tag">Production Support</span>
-<span class="skill-tag">SDLC</span>
-<span class="skill-tag">Agile</span>
-<span class="skill-tag">Scrum</span>
-<span>Healthcare Claims Automation</span><span>Claims Adjudication Flow</span><span>Eligibility &amp; Benefits Validation</span><span>Exception Routing</span></div>
+<div class="capabilities">
+<article class="card"><div class="card-num">01</div><h3>Discovery &amp; Process Mapping</h3><p>Lead workshops, shadow users, map current-state workflows, identify edge cases, and define measurable outcomes.</p></article>
+<article class="card"><div class="card-num">02</div><h3>Solution Architecture</h3><p>Design scalable solutions across automation, AI, APIs, enterprise applications, data, and human-in-the-loop operations.</p></article>
+<article class="card"><div class="card-num">03</div><h3>Rapid Prototyping</h3><p>Validate the hardest assumptions early through proofs of concept, technical spikes, and iterative stakeholder reviews.</p></article>
+<article class="card"><div class="card-num">04</div><h3>Implementation &amp; Integration</h3><p>Guide hands-on development and integration across UiPath, Pega, .NET, SQL, mainframe, web, desktop, and document workflows.</p></article>
+<article class="card"><div class="card-num">05</div><h3>Deployment &amp; Change Adoption</h3><p>Coordinate testing, release, training, communication, hypercare, and adoption with business and technology teams.</p></article>
+<article class="card"><div class="card-num">06</div><h3>Production Support &amp; Scale</h3><p>Monitor reliability, resolve issues, improve frameworks, mentor teams, and convert field feedback into product improvements.</p></article>
 </div>
 </div>
 </section>
-<!-- EXPERIENCE -->
 <section id="experience">
-<div class="section-label">Career</div>
-<h2 class="section-title reveal">Professional Journey</h2>
-<div class="exp-timeline">
-<div class="exp-item reveal">
-<div class="exp-meta">
-<span class="exp-period">Feb 2020 – Present</span>
-<span class="exp-location">📍 Bloomfield, CT</span>
+<div class="container">
+<div class="section-head">
+<div class="section-kicker">Experience</div>
+<div>
+<h2>Enterprise delivery across healthcare, banking, and utilities.</h2>
+<p class="section-intro">Experience shown below focuses on U.S.-based enterprise engagements.</p>
 </div>
-<div class="exp-title">UiPath Architect / RPA Architect (UiPath &amp; Pega Robotics)</div>
-<div class="exp-company">Cigna</div>
-<ul class="exp-bullets">
-<li>Analyzed business requirements, owned automation delivery for on-demand applications, and demonstrated RPA capabilities to project teams and stakeholders.</li>
-<li>Built and supported Pega Robotics desktop automations using application and web adapters, including custom DLL development in Visual Studio.</li>
-<li>Led healthcare automation with a UiPath-first strategy while retaining Pega Robotics for attended and legacy use cases.</li>
-<li>Developed UiPath workflows for healthcare claims intake, provider data validation, member eligibility verification, benefits checks, and downstream payer operations, reducing manual processing time by 40%.</li><li>Architected end-to-end healthcare claims flow solutions spanning intake, claim setup, eligibility, benefits validation, provider verification, prior authorization support, pricing / allowable checks, claim document retrieval, and SLA-driven exception routing, contributing to $50M+ in business savings and operational value.</li>
-<li>Applied UiPath Agentic AI, UiPath Autopilot, and Cursor-enabled practices to accelerate healthcare workflow design, documentation, reusable component development, and delivery productivity.</li>
+</div>
+<div class="timeline">
+<article class="role">
+<div class="role-meta"><strong>Feb 2020 - Present</strong>Bloomfield, CT</div>
+<div>
+<h3>Forward Deployment Engineer (FDE) / Automation Architect / AI Architect</h3>
+<div class="role-company">Major U.S. Health Payer Client · Virtusa</div>
+<ul>
+<li>Embedded with healthcare operations, business stakeholders, and engineering teams to map end-to-end payer workflows from claim intake through eligibility, benefits, provider validation, pricing, adjudication support, and exception handling.</li>
+<li>Architected and deployed enterprise automation contributing to $100M+ in business value and up to 40% reduction in manual processing across claims and eligibility workflows.</li>
+<li>Led solution design, implementation, testing, release readiness, production rollout, support, and iterative improvement using UiPath, Agentic AI patterns, Autopilot, C#, and enterprise integrations.</li>
+<li>Led migration of automation projects from multiple legacy tools, including Pega Robotics/OpenSpan, Blue Prism, and Automation Anywhere, to UiPath; established assessment, conversion, reusable framework, testing, release, and production-support standards.</li>
+<li>Built reusable standards and components, mentored delivery teams, and translated production feedback into scalable design improvements.</li>
 </ul>
+<div class="tags"><span class="tag">FDE</span><span class="tag">Automation Architect</span><span class="tag">AI Architect</span><span class="tag">Healthcare Payer</span><span class="tag">Migration to UiPath</span><span class="tag">Production Delivery</span></div>
 </div>
-<div class="exp-item reveal">
-<div class="exp-meta">
-<span class="exp-period">Jun 2018 – Dec 2019</span>
-<span class="exp-location">📍 Norfolk, VA</span>
-</div>
-<div class="exp-title">SR RPA Developer (Pega Robotics)</div>
-<div class="exp-company">Anthem Inc.</div>
-<ul class="exp-bullets">
-<li>Worked on ACMS process automation supporting the transition of legacy applications to Pega while automating multiple manual tasks.</li>
-<li>Delivered end-to-end RPA and RDA bot development and deployment across IBM Mainframes, web applications, web services, MS Office, and SQL Server applications.</li>
-<li>Used Pega application triggers, clipboard changes, Office Connectors, and PDF Connector to automate member and customer-center workflows.</li>
-<li>Configured SourceTree and Bitbucket for deployment, debugged issues using runtime logs, and monitored production DaaS machines for a large RDA user base.</li>
+</article>
+<article class="role">
+<div class="role-meta"><strong>Jun 2018 - Dec 2019</strong>Norfolk, VA</div>
+<div>
+<h3>Senior RPA Developer</h3>
+<div class="role-company">Anthem Inc.</div>
+<ul>
+<li>Partnered with business and application teams to automate ACMS-related workflows and support migration from legacy applications to Pega-based solutions.</li>
+<li>Delivered RPA and RDA solutions spanning IBM mainframes, web applications, web services, Microsoft Office, PDFs, and SQL Server.</li>
+<li>Supported deployment and production operations across a large DaaS user environment using SourceTree and Bitbucket.</li>
 </ul>
+<div class="tags"><span class="tag">Insurance Operations</span><span class="tag">Pega Robotics</span><span class="tag">IBM Mainframe</span><span class="tag">Production Support</span></div>
 </div>
-<div class="exp-item reveal">
-<div class="exp-meta">
-<span class="exp-period">Mar 2018 – Jul 2018</span>
-<span class="exp-location">📍 Los Angeles, CA</span>
-</div>
-<div class="exp-title">RPA Lead (Pega Robotics)</div>
-<div class="exp-company">Southern California Edison</div>
-<ul class="exp-bullets">
-<li>Gathered requirements, translated business logic into technical specifications, and guided users toward clear automation-ready requirements.</li>
-<li>Created RPA and RDA tasks using Pega Robotics, including Microsoft Application Virtualization Client automation with Windows adapters.</li>
-<li>Worked hands-on with Agile Desktop and the interaction framework to support attended automation scenarios.</li>
-<li>Implemented TFS and OMC for integration and deployment, resolved issues independently, and supported production stability.</li>
+</article>
+<article class="role">
+<div class="role-meta"><strong>Mar 2018 - Jul 2018</strong>Los Angeles, CA</div>
+<div>
+<h3>RPA Lead</h3>
+<div class="role-company">Southern California Edison</div>
+<ul>
+<li>Conducted stakeholder discovery and translated operational requirements into technical specifications and automation-ready designs.</li>
+<li>Led attended and unattended automations using Pega Robotics, including Windows and Microsoft App-V integrations.</li>
+<li>Implemented TFS and OMC integration and deployment practices while resolving delivery issues independently.</li>
 </ul>
+<div class="tags"><span class="tag">Utilities</span><span class="tag">Requirements Discovery</span><span class="tag">Pega Robotics</span><span class="tag">Deployment</span></div>
 </div>
-<div class="exp-item reveal">
-<div class="exp-meta">
-<span class="exp-period">Mar 2017 – Feb 2018</span>
-<span class="exp-location">📍 Atlanta, GA</span>
-</div>
-<div class="exp-title">RPA Tech Lead (Pega Robotics)</div>
-<div class="exp-company">SunTrust Bank · Implementing Partner: Infosys</div>
-<ul class="exp-bullets">
-<li>Led automation work across Mortgage, Fraud, and AML processes, collaborating with business, offshore, and onshore teams in Agile/SCRUM delivery.</li>
-<li>Built 6 end-to-end RDA and RPA processes spanning Salesforce, Equifax, Lending Space, web applications, Windows applications, and mainframes.</li>
-<li>Created reusable automation frameworks, external scripts using VBS/VBA, and robust exception handling for stable production operations.</li>
-<li>Produced PDD and SDD artifacts, performed stress testing for scalability, and supported immediate production issue resolution and bug fixes.</li>
+</article>
+<article class="role">
+<div class="role-meta"><strong>Mar 2017 - Feb 2018</strong>Atlanta, GA</div>
+<div>
+<h3>RPA Tech Lead</h3>
+<div class="role-company">SunTrust Bank · Infosys</div>
+<ul>
+<li>Led delivery across mortgage, fraud, and AML processes, coordinating business, onshore, and offshore teams in Agile/Scrum.</li>
+<li>Built six end-to-end RPA/RDA processes across Salesforce, Equifax, Lending Space, mainframe, web, and Windows applications.</li>
+<li>Created reusable frameworks, robust exception handling, PDD/SDD artifacts, and stress tests for production scalability.</li>
 </ul>
+<div class="tags"><span class="tag">Banking</span><span class="tag">Mortgage</span><span class="tag">Fraud &amp; AML</span><span class="tag">Technical Leadership</span></div>
 </div>
-<div class="exp-item reveal">
-<div class="exp-meta">
-<span class="exp-period">Apr 2014 – Sep 2015</span>
-<span class="exp-location">📍 India</span>
-</div>
-<div class="exp-title">.Net Developer</div>
-<div class="exp-company">Broadgate Pvt Ltd</div>
-<ul class="exp-bullets">
-<li>Developed a customer-service performance management web application using ASP.NET, C#, MVC design pattern, and SQL Server 2008.</li>
-<li>Implemented OOP concepts across tracking and statistical-analysis modules and built reusable UI functionality through user controls.</li>
-<li>Created client-side and server-side validations, .NET reports, and data views with paging, sorting, session management, and cookies.</li>
-<li>Participated in the full project lifecycle and maintained source control in Team Foundation Server.</li>
-</ul>
+</article>
 </div>
 </div>
 </section>
-<!-- PROJECTS -->
-<section id="projects">
-<div class="section-label">Impact</div>
-<h2 class="section-title reveal">Selected Work Highlights</h2>
-<div class="proj-grid">
-<div class="proj-card reveal">
-<span class="proj-tag">Healthcare · UiPath · Agentic AI · Pega Robotics</span>
-<h3>Cigna Claims &amp; Eligibility Automation</h3>
-<p>Architected healthcare claims automation with a UiPath-first approach across claim intake, member eligibility, benefits validation, provider data checks, prior authorization support, pricing / allowable validation, claim document retrieval, and exception handling, while retaining Pega Robotics for legacy and attended scenarios and using UiPath Agentic AI and Autopilot-driven acceleration.</p>
-<div class="proj-metrics">
-<div class="proj-metric"><strong>40%</strong><span>Manual effort reduced</span></div>
-<div class="proj-metric"><strong>3</strong><span>Core workflow areas</span></div>
+<section id="work">
+<div class="container">
+<div class="section-head">
+<div class="section-kicker">Selected Impact</div>
+<div>
+<h2>Solutions designed around real operational outcomes.</h2>
+<p class="section-intro">Representative programs that demonstrate forward-deployed problem solving.</p>
 </div>
 </div>
-<div class="proj-card reveal">
-<span class="proj-tag">Insurance · Mainframe · RDA</span>
-<h3>Anthem ACMS Process Automation</h3>
-<p>Automated multiple manual tasks while supporting the transition of legacy applications to Pega, using mainframe, web, PDF, office, and customer-center integrations.</p>
-<div class="proj-metrics">
-<div class="proj-metric"><strong>RPA + RDA</strong><span>Delivery model</span></div>
-<div class="proj-metric"><strong>DaaS</strong><span>Production support</span></div>
-</div>
-</div>
-<div class="proj-card reveal">
-<span class="proj-tag">Utilities · Attended Automation</span>
-<h3>Southern California Edison Automation</h3>
-<p>Led attended and unattended automation initiatives, translating business requirements into automation-ready technical designs and stable production solutions.</p>
-<div class="proj-metrics">
-<div class="proj-metric"><strong>Lead</strong><span>Project role</span></div>
-<div class="proj-metric"><strong>TFS / OMC</strong><span>Deployment stack</span></div>
-</div>
-</div>
-<div class="proj-card reveal">
-<span class="proj-tag">Banking · Mortgage · Fraud · AML</span>
-<h3>SunTrust Banking Automation</h3>
-<p>Delivered automation across high-value banking processes using Pega Robotics, reusable frameworks, external scripting, and detailed production-readiness practices.</p>
-<div class="proj-metrics">
-<div class="proj-metric"><strong>6</strong><span>End-to-end processes</span></div>
-<div class="proj-metric"><strong>PDD / SDD</strong><span>Design artifacts</span></div>
-</div>
-</div>
-<div class="proj-card reveal">
-<span class="proj-tag">.NET · MVC · Reporting</span>
-<h3>CSC Performance Management Application</h3>
-<p>Built a web application for rating customer-care agent performance and generating role-based reports using ASP.NET MVC, C#, ADO.NET, and SQL Server.</p>
-<div class="proj-metrics">
-<div class="proj-metric"><strong>MVC</strong><span>Design Pattern</span></div>
-<div class="proj-metric"><strong>SSRS</strong><span>Reporting</span></div>
-</div>
-</div>
-<div class="proj-card reveal">
-<span class="proj-tag">Delivery · Support · Quality</span>
-<h3>End-to-End Automation Delivery</h3>
-<p>Worked across analysis, feasibility, solution design, development, testing, deployment, maintenance, and production support for enterprise automation programs.</p>
-<div class="proj-metrics">
-<div class="proj-metric"><strong>SDLC</strong><span>Full lifecycle</span></div>
-<div class="proj-metric"><strong>Agile</strong><span>Execution model</span></div>
-</div>
+<div class="work-grid">
+<article class="project"><div class="project-label">Healthcare · Claims · AI &amp; Automation</div><h3>Claims and Eligibility Transformation</h3><p>Mapped complex payer workflows and delivered production solutions across intake, eligibility, provider verification, benefits, pricing, documents, and exception routing. Contributed to $100M+ in value and substantial reduction in manual effort.</p></article>
+<article class="project"><div class="project-label">Insurance · Mainframe · Desktop</div><h3>ACMS Operations Modernization</h3><p>Built and supported RPA/RDA workflows integrating mainframe, web, Office, PDF, SQL, and customer-center applications, with deployment and support for a large DaaS user base.</p></article>
+<article class="project"><div class="project-label">Banking · Mortgage · Fraud · AML</div><h3>Six End-to-End Banking Automations</h3><p>Led discovery, design, development, documentation, testing, and release for six processes across Salesforce, Equifax, Lending Space, Windows, web, and mainframe applications.</p></article>
+<article class="project"><div class="project-label">Enterprise Modernization · UiPath</div><h3>Multi-Tool Migration to UiPath</h3><p>Led migration of automation projects from Pega Robotics/OpenSpan, Blue Prism, Automation Anywhere, and other legacy tools to UiPath, supported by reusable architecture, testing, release, hypercare, and production-support standards.</p></article>
 </div>
 </div>
 </section>
-<!-- CONTACT -->
+<section id="skills">
+<div class="container">
+<div class="section-head">
+<div class="section-kicker">Technical Profile</div>
+<div>
+<h2>Broad enough to solve the whole problem.</h2>
+<p class="section-intro">Business discovery, architecture, engineering, deployment, and operational ownership.</p>
+</div>
+</div>
+<div class="skills-grid">
+<div class="skill-block"><h3>Forward Deployment</h3><p>Stakeholder discovery · Process mapping · Requirements · Solution architecture · Rapid prototyping · Delivery planning · Testing · Deployment · Adoption · Hypercare · Production support</p></div>
+<div class="skill-block"><h3>Automation &amp; AI</h3><p>UiPath · Agentic AI patterns · Autopilot · AI Center · UiPath Apps · Pega Robotics / OpenSpan · Blue Prism · Automation Anywhere · Human-in-the-loop workflows</p></div>
+<div class="skill-block"><h3>Engineering &amp; Integration</h3><p>C# · VB.NET · ASP.NET · SQL · JavaScript · HTML/CSS · APIs · Web services · Custom DLLs · Mainframe · Web and desktop applications · Microsoft Office</p></div>
+<div class="skill-block"><h3>Delivery &amp; Tools</h3><p>Agile · Scrum · SDLC · PDD/SDD · Git · Bitbucket · TFS · SourceTree · Visual Studio · Cursor · SoapUI · Release management · Team mentoring</p></div>
+</div>
+</div>
+</section>
 <section id="contact">
-<div class="contact-wrap">
-<div class="section-label" style="justify-content:center;">Let's Connect</div>
-<h2 class="section-title reveal" style="text-align:center;">Open to Discuss<br/>Automation Opportunities</h2>
-<p class="reveal">For UiPath architect roles, healthcare claims automation, Agentic AI, Autopilot-enabled delivery, payer operations transformation, Pega Robotics modernization, or senior RPA leadership opportunities, feel free to reach out.</p>
-<div class="contact-links reveal">
-<a class="contact-card" href="mailto:mohsin.sma0105@gmail.com">
-<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path></svg>
-        mohsin.sma0105@gmail.com
-      </a>
-<a class="contact-card" href="mailto:mmsyed@virtusa.com">
-<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path></svg>
-        mmsyed@virtusa.com
-      </a>
-<a class="contact-card" href="tel:+12177616372">
-<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 6.75z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        217-761-6372
-      </a>
+<div class="container contact-wrap">
+<div>
+<div class="section-kicker">Contact</div>
+<h2>Let’s turn a difficult operational problem into a solution teams can use.</h2>
+<p class="section-intro">Open to Forward Deployment Engineer (FDE), Automation Architect, AI Architect, Forward-Deployed Technology Architect, and enterprise automation leadership opportunities.</p>
+<div class="hero-actions">
+<a class="button" href="mailto:mohsin.sma0105@gmail.com">Email Me</a>
+<a class="button resume-button" download="" href="Syed_Mohsin_FDE_Automation_AI_Architect_Resume.pdf">Download Resume</a>
+</div>
+</div>
+<div class="contact-box">
+<div class="contact-row"><span>Email</span><a href="mailto:mohsin.sma0105@gmail.com">mohsin.sma0105@gmail.com</a></div>
+<div class="contact-row"><span>LinkedIn</span><a href="https://www.linkedin.com/in/syedm0105/" rel="noreferrer" target="_blank">linkedin.com/in/syedm0105</a></div>
+<div class="contact-row"><span>Location</span><strong>Bloomfield, Connecticut</strong></div>
 </div>
 </div>
 </section>
+</main>
 <footer>
-<span>Syed Mohsin</span>
-<p>UiPath Architect · Agentic AI · Intelligent Automation</p>
+<div class="container footer">
+<span>© 2026 Syed Mohsin</span>
+<span>Forward Deployment Engineer · Automation Architect · AI Architect</span>
+</div>
 </footer>
-<script>
-// Cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
-(function animRing(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
-
-// Nav scroll
-const navbar=document.getElementById('navbar');
-window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',scrollY>60);});
-
-// Scroll reveal
-const reveals=document.querySelectorAll('.reveal');
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
-},{threshold:.12});
-reveals.forEach(r=>io.observe(r));
-
-// Counter animation
-const counters=document.querySelectorAll('[data-count]');
-const cio=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const el=e.target,target=+el.dataset.count,dur=1800,step=target/(dur/16);
-      let cur=0;
-      const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=Math.floor(cur)+'+';if(cur>=target)clearInterval(t);},16);
-      cio.unobserve(el);
-    }
-  });
-},{threshold:.5});
-counters.forEach(c=>cio.observe(c));
-
-// Particle canvas
-const canvas=document.getElementById('bg-canvas');
-const ctx=canvas.getContext('2d');
-let W,H,particles=[];
-
-function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
-resize();window.addEventListener('resize',()=>{resize();init();});
-
-class Particle{
-  constructor(){this.reset();}
-  reset(){
-    this.x=Math.random()*W;this.y=Math.random()*H;
-    this.vx=(Math.random()-.5)*.35;this.vy=(Math.random()-.5)*.35;
-    this.r=Math.random()*1.5+.4;this.a=Math.random();this.da=.003+Math.random()*.003;
-    this.phase=Math.random()*Math.PI*2;
-    this.color=Math.random()<.5?'0,200,255':'123,92,240';
-  }
-  update(){
-    this.x+=this.vx;this.y+=this.vy;this.phase+=.015;
-    this.a=(.4+Math.sin(this.phase)*.3)*(.5+Math.random()*.1);
-    if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset();
-  }
-  draw(){
-    ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(${this.color},${this.a})`;ctx.fill();
-  }
-}
-
-function init(){particles=[];for(let i=0;i<160;i++)particles.push(new Particle());}
-init();
-
-// Connection lines
-function drawConnections(){
-  for(let i=0;i<particles.length;i++){
-    for(let j=i+1;j<particles.length;j++){
-      const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<110){
-        ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);
-        ctx.strokeStyle=`rgba(0,200,255,${(1-dist/110)*.07})`;ctx.lineWidth=.5;ctx.stroke();
-      }
-    }
-  }
-}
-
-function animate(){
-  ctx.clearRect(0,0,W,H);
-  particles.forEach(p=>{p.update();p.draw();});
-  drawConnections();
-  requestAnimationFrame(animate);
-}
-animate();
-
-// Mouse influence on particles
-document.addEventListener('mousemove',e=>{
-  particles.forEach(p=>{
-    const dx=e.clientX-p.x,dy=e.clientY-p.y,dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<120){p.vx-=dx/dist*.015;p.vy-=dy/dist*.015;}
-  });
-});
-</script>
 </body>
 </html>
