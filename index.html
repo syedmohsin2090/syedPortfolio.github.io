@@ -6,6 +6,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="Syed Mohsin - Forward Deployment Engineer (FDE), Automation Architect, and AI Architect specializing in healthcare payer operations, enterprise automation modernization, and production delivery." name="description"/>
 <title>Syed Mohsin | FDE · Automation Architect · AI Architect</title>
+<script>document.documentElement.classList.add("js");</script>
 <style>
     :root {
       --bg: #ffffff;
@@ -51,15 +52,22 @@
     .brand-role { color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
     .nav-links { display: flex; align-items: center; gap: 22px; }
     .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 650; }
+    .nav-links a { position: relative; transition: color .2s ease; }
+    .nav-links a:not(.button)::after {
+      content: ""; position: absolute; left: 0; right: 100%; bottom: -7px; height: 2px;
+      background: var(--accent); transition: right .25s ease;
+    }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a:not(.button):hover::after { right: 0; }
     .button {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       min-height: 44px; padding: 0 18px; border-radius: 8px;
       border: 1px solid var(--accent); background: var(--accent); color: #fff;
       text-decoration: none; font-weight: 750; font-size: 14px;
-      transition: transform .15s ease, background .15s ease;
+      transition: transform .25s ease, background .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
-    .button:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .button:hover { background: var(--accent-dark); transform: translateY(-3px); box-shadow: 0 10px 24px rgba(23,78,166,.18); }
+    .button:active { transform: translateY(-1px) scale(.99); }
     .button.resume-button { background: #174ea6; color: #ffffff; border-color: #174ea6; }
     .button.resume-button:visited { color: #ffffff; }
     .button.resume-button:hover { background: #103a7a; color: #ffffff; border-color: #103a7a; }
@@ -99,7 +107,8 @@
     .focus-item p { margin: 0; color: var(--muted); font-size: 14px; }
 
     .capabilities { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .card { border: 1px solid var(--line); border-radius: 10px; padding: 26px; background: #fff; }
+    .card { border: 1px solid var(--line); border-radius: 10px; padding: 26px; background: #fff; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+    .card:hover { transform: translateY(-6px); border-color: #c5d3e8; box-shadow: 0 16px 36px rgba(17,24,39,.08); }
     .card-num { color: var(--accent); font-size: 12px; font-weight: 850; letter-spacing: .1em; }
     .card h3 { margin: 16px 0 10px; font-size: 19px; letter-spacing: -.02em; }
     .card p { margin: 0; color: var(--muted); font-size: 14px; }
@@ -116,12 +125,14 @@
     .tag { border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 12px; color: var(--muted); background: #fff; }
 
     .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .skill-block { border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
+    .skill-block { border: 1px solid var(--line); border-radius: 10px; padding: 24px; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+    .skill-block:hover { transform: translateY(-4px); border-color: #c5d3e8; box-shadow: 0 14px 30px rgba(17,24,39,.07); }
     .skill-block h3 { margin: 0 0 14px; font-size: 17px; }
     .skill-block p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
 
     .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .project { border: 1px solid var(--line); border-radius: 10px; padding: 26px; }
+    .project { border: 1px solid var(--line); border-radius: 10px; padding: 26px; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+    .project:hover { transform: translateY(-5px); border-color: #c5d3e8; box-shadow: 0 16px 34px rgba(17,24,39,.08); }
     .project-label { color: var(--accent); font-size: 11px; font-weight: 850; text-transform: uppercase; letter-spacing: .12em; }
     .project h3 { margin: 12px 0 10px; font-size: 21px; }
     .project p { color: var(--muted); margin: 0; font-size: 14px; }
@@ -163,6 +174,58 @@
       section { padding: 64px 0; }
       .footer { flex-direction: column; }
     }
+
+
+    /* Subtle motion */
+    .topbar { animation: navEnter .55s ease-out both; }
+    .hero .eyebrow { animation: fadeUp .6s .08s ease-out both; }
+    .hero h1 { animation: fadeUp .7s .16s ease-out both; }
+    .hero-title { animation: fadeUp .7s .24s ease-out both; }
+    .hero-copy { animation: fadeUp .7s .32s ease-out both; }
+    .hero-actions { animation: fadeUp .7s .40s ease-out both; }
+    .hero-meta { animation: fadeUp .7s .48s ease-out both; }
+
+    .eyebrow::after, .section-kicker::after {
+      content: ""; display: inline-block; width: 0; height: 2px; margin-left: 10px;
+      vertical-align: middle; background: var(--accent); animation: lineGrow .65s .35s ease-out forwards;
+    }
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .65s ease, transform .65s cubic-bezier(.22,1,.36,1);
+      transition-delay: var(--delay, 0ms);
+    }
+    .js .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    .role { transition: background .25s ease, padding-left .25s ease; }
+    .role:hover { background: linear-gradient(90deg, rgba(23,78,166,.035), transparent 65%); padding-left: 10px; }
+    .tag { transition: transform .2s ease, border-color .2s ease, color .2s ease; }
+    .tag:hover { transform: translateY(-2px); border-color: #a9bddb; color: var(--accent); }
+    .stat strong { transition: color .25s ease, transform .25s ease; transform-origin: left center; }
+    .stat:hover strong { color: var(--accent); transform: scale(1.04); }
+
+    @keyframes navEnter {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes lineGrow { to { width: 34px; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+
     @media print {
       .topbar, .hero-actions { display: none; }
       .hero, section { padding: 36px 0; }
@@ -387,5 +450,46 @@
 <span>Forward Deployment Engineer · Automation Architect · AI Architect</span>
 </div>
 </footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const groups = [
+      '.stats .stat',
+      '.section-head',
+      '.about-copy',
+      '.focus-item',
+      '.capabilities .card',
+      '.timeline .role',
+      '.work-grid .project',
+      '.skills-grid .skill-block',
+      '.contact-wrap > *'
+    ];
+
+    const elements = [];
+    groups.forEach(function (selector) {
+      document.querySelectorAll(selector).forEach(function (el, index) {
+        el.classList.add('reveal');
+        el.style.setProperty('--delay', Math.min(index * 70, 280) + 'ms');
+        elements.push(el);
+      });
+    });
+
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+
+    const observer = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -45px 0px' });
+
+    elements.forEach(function (el) { observer.observe(el); });
+  });
+</script>
 </body>
 </html>
